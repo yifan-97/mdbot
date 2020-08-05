@@ -117,7 +117,8 @@ $human_message_text: white;
   .logo {
     margin: 0;
     display: flex;
-
+    align-items: center;
+    
     .logo-svg-icon {
       width: 1.5em;
       height: 1.5em;
@@ -135,13 +136,25 @@ $human_message_text: white;
     }
 
     .logo-text {
-      margin-left: 0.5em;
+      margin-left: 0.25em;
       font-weight: bold;
       color: $mdout-blue;
+    }
+
+    .operator {
+      width: auto;
+      height: auto;
+    }
+
+    .operator img {
+      border-radius: 50%;
+      border: 3px solid $mdout-blue;
+
     }
   }
 
   .message {
+    margin-top: 0;
     padding: 0.5rem;
     width: auto;
     display: block;

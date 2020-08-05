@@ -212,6 +212,7 @@ a.button:hover {
 #message_window .logo {
   margin: 0;
   display: flex;
+  align-items: center;
 }
 #message_window .logo .logo-svg-icon {
   width: 1.5em;
@@ -227,11 +228,20 @@ a.button:hover {
   stroke-width: 1;
 }
 #message_window .logo .logo-text {
-  margin-left: 0.5em;
+  margin-left: 0.25em;
   font-weight: bold;
   color: #008ed6;
 }
+#message_window .logo .operator {
+  width: auto;
+  height: auto;
+}
+#message_window .logo .operator img {
+  border-radius: 50%;
+  border: 3px solid #008ed6;
+}
 #message_window .message {
+  margin-top: 0;
   padding: 0.5rem;
   width: auto;
   display: block;
