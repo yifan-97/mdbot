@@ -6,7 +6,7 @@ module.exports = function(controller) {
     const MY_DIALOG_ID = 'GREETINGS_DIALOG';
     let convo = new BotkitConversation(MY_DIALOG_ID, controller);
     // send a greeting
-    convo.say('Welcome to MDout. I am MDbot. I am here to assist you');
+    convo.say('Welcome to MDout. I\'m Sarah and I am here to assist you');
 
     // ask a question, store the response in 'name'
     convo.ask('May I get your first name please?', async(response, convo, bot) => {

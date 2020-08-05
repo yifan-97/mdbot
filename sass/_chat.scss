@@ -1,124 +1,179 @@
 $action_color: orange;
-$background: #FFFFFF;
-$bot_message_background: #F0F0F0;
-$bot_message_text: #333;
-$human_message_background: $botkit_purple;
+$white-background: #fff;
+
+$mdout-blue: #008ed6;
+$mdout-dark-blue: #004c73;
+$bot_message_background: #dedede;
+$bot_message_time: #b3b3b3;
 $human_message_text: white;
 
 #message_window {
-    background: $background;
-    border-left: 1px solid #CCC;
-    border-right: 1px solid #CCC;
+  font-size: 14px;
+  background: $white-background;
 
-    /*height: 500px;
-    width: 320px;*/
-    height: 100%;
-    width: 100%;
-    /*margin: 2rem auto;*/
-    display: flex;
-    flex-direction: column;
-    font-family: 'helvetica', sans-serif;
+  height: 100%;
+  width: 100%;
 
+  display: flex;
+  flex-direction: column;
+
+  font-family: "helvetica", sans-serif;
+
+  .disconnected {
+    padding: 0.25rem;
+    color: $mdout-blue;
+    text-align: center;
+    letter-spacing: 0.2em;
+  }
+
+  &.connected .disconnected {
+    display: none;
+  }
+
+  .offline {
+    display: none;
+  }
+
+  &.offline {
     .disconnected {
-        background: #FFFFCC;
-        padding: 0.25rem;
+      display: none;
     }
-    &.connected .disconnected {
-        display: none;
-    }
+
     .offline {
-        display: none;
-    }
-    &.offline {
-
-      .disconnected {
-        display: none;
-      }
-      .offline {
-        background: #FF0000;
-        color: #FFF;
-        padding: 0.25rem;
-        display: block;
-      }
-    }
-
-    .powered_by {
-      flex-shrink: 0;
-      text-align: center;
-
-      border-bottom: 1px solid #CCC;
-      font-size: 14px;
+      color: red;
       padding: 0.25rem;
-      color: #666;
-
-      a {
-        text-decoration: none;
-        color: #666;
-      }
-
-      img {
-        position: relative;
-        top: 2px;
-      }
+      letter-spacing: 0.2em;
+      display: block;
+      text-align: center;
     }
+  }
 
-   section {
-      flex-grow:  1;
-      flex-direction: column-reverse;
-      display: flex;
-      overflow-y: auto;
+  section {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
 
-     div div {
-        margin: 0.25rem;
-        clear: both;
+    div div {
+      margin: 0.25rem;
+      clear: both;
     }
   }
 
   footer {
-      border-top: 1px solid #CCC;
-      padding: 0.25rem;
-      input[type="text"] {
-          flex-grow: 1;
-          font-size: 1.25rem;
-          outline: none;
-          border: none;
-      }
-      button {
-         width: 50px;
-         background: none;
-         border: 0;
-         cursor: pointer;
-         color: blue;
-         font-weight: bold;
-     }
+    padding: 0.25rem;
+    input[type="text"] {
+      color: $mdout-dark-blue;
+      flex-grow: 1;
+      border: none;
+      box-shadow: 0 0 2px grey;
+      border-radius: 5px;
+      padding: 10px;
+      margin-left: 5px;
+    }
+
+    input[type="text"]:focus {
+      box-shadow: 0 0 5px grey;
+    }
+
+    button {
+      background: none;
+      border: 0;
+    }
+
+    // Send button SVG icon
+    .send-svg-icon {
+      width: 2em;
+      height: 2em;
+    }
+
+    .send-svg-icon path,
+    .send-svg-icon polygon,
+    .send-svg-icon rect {
+      fill: $mdout-blue;
+    }
+
+    .send-svg-icon circle {
+      stroke: $mdout-blue;
+      stroke-width: 1;
+    }
+
+    .send-svg-icon:hover {
+      stroke: $mdout-dark-blue;
+    }
   }
 
   form {
-      display: flex;
-      margin: 0;
-      padding: 0.25rem;
+    display: flex;
+    margin: 0;
+    padding: 0.25rem;
   }
 
   #message_template {
-      display: none;
+    display: none;
+  }
+
+  .logo {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    
+    .logo-svg-icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+    .logo-svg-icon path,
+    .logo-svg-icon polygon,
+    .logo-svg-icon rect {
+      fill: $mdout-blue;
+    }
+
+    .logo-svg-icon circle {
+      stroke: $mdout-blue;
+      stroke-width: 1;
+    }
+
+    .logo-text {
+      margin-left: 0.25em;
+      font-weight: bold;
+      color: $mdout-blue;
+    }
+
+    .operator {
+      width: auto;
+      height: auto;
+    }
+
+    .operator img {
+      border-radius: 50%;
+      border: 3px solid $mdout-blue;
+
+    }
   }
 
   .message {
-      font-size: 14px;
-      padding: 0.5rem;
-      background: $bot_message_background;
-      color: $bot_message_text;
-      border-radius: 5px;
-      width: auto;
-      display: inline-block;
-      max-width: 75%;
+    margin-top: 0;
+    padding: 0.5rem;
+    width: auto;
+    display: block;
+    max-width: 75%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
 
+  .message.incoming {
+    margin-left: 1em;
+    float: left;
+    background: $mdout-blue;
+    color: $human_message_text;
+    border-radius: 0 10px 10px 10px;
   }
 
   .file_attachment {
-
     background: $bot_message_background;
-    color: $bot_message_text;
+    color: $mdout-dark-blue;
     border-radius: 5px;
     display: inline-block;
     max-width: 75%;
@@ -127,77 +182,81 @@ $human_message_text: white;
       max-width: 100%;
       display: block;
     }
-
   }
 
-    .button_message {
-      margin: 1rem 0;
-      border-radius: 4px;
-      border-color: $action_color;
-      border-style: solid;
-      color: $action_color;
-      border-width: 1px;
-      padding: 0.25rem 1rem;
-      text-decoration: none;
-      text-align: center;
-      box-shadow: 1px 1px 2px rgba(0,0,0,0.25);
-      display: block;
-    }
-
+  .button_message {
+    margin: 1rem 0;
+    border-radius: 4px;
+    border-color: $action_color;
+    border-style: solid;
+    color: $action_color;
+    border-width: 1px;
+    padding: 0.25rem 1rem;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+    display: block;
+  }
 
   .message p {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 
   .message p:last-child {
-      margin-bottom: 0;
+    margin-bottom: 0;
   }
 
   .message.outgoing {
-      float: right;
+    float: right;
+    border-radius: 10px 0 10px 10px;
+    background: $bot_message_background;
+    color: $mdout-blue;
+  }
 
-      background: $human_message_background;
-      color: $human_message_text;
-
+  .message.time {
+    background-color: white;
+    color: $bot_message_time;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 8;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   #message_replies {
-      text-align: center;
-      overflow-x: auto;
-      flex-shrink: 0;
-      -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+    text-align: center;
+    overflow-x: auto;
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
 
-      ul {
-          list-style-type: none;
-          margin: 0px auto;
-          padding: 0;
-          li {
-              display: inline-block;
-              margin: 0.5rem;
-              margin-left: 0;
-          }
+    ul {
+      list-style-type: none;
+      margin: 0px auto;
+      padding: 0;
+      li {
+        display: inline-block;
+        margin: 0.5rem;
+        margin-left: 0;
       }
+    }
 
-      a {
-         text-decoration: none;
-         display: block;
-         border: 1px solid $botkit_purple;
-         color: $botkit_purple;
-         border-radius: 16px;
-         padding: 0.25rem 1rem;
-         font-size: 14px;
-         cursor: pointer;
+    a {
+      text-decoration: none;
+      display: block;
+      border: 1px solid $mdout-blue;
+      color: $mdout-blue;
+      border-radius: 16px;
+      padding: 0.25rem 1rem;
+      cursor: pointer;
 
-         &:hover {
-           background: $botkit_purple;
-           color: #FFF;
-         }
-     }
-   }
+      &:hover {
+        background: $mdout-blue;
+        color: #fff;
+      }
+    }
+  }
 }
-
-
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
 .typing-indicator {
@@ -209,13 +268,13 @@ $human_message_text: white;
     width: 5px;
     float: left;
     margin: 0 1px;
-    background-color: $bot_message_text;
+    background-color: $mdout-dark-blue;
     display: block;
     border-radius: 50%;
     opacity: 0.4;
     @for $i from 1 through 3 {
       &:nth-of-type(#{$i}) {
-        animation: 1s blink infinite ($i * .3333s);
+        animation: 1s blink infinite ($i * 0.3333s);
       }
     }
   }

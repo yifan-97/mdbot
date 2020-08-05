@@ -53,7 +53,11 @@ footer {
 }
 
 a {
-  color: #a795ef;
+  color: white;
+}
+
+a:hover {
+  color: #004C73;
 }
 
 .copyurl {
@@ -121,21 +125,19 @@ a.button:hover {
 
 /* chat client */
 #message_window {
-  background: #FFFFFF;
-  border-left: 1px solid #CCC;
-  border-right: 1px solid #CCC;
-  /*height: 500px;
-  width: 320px;*/
+  font-size: 14px;
+  background: #fff;
   height: 100%;
   width: 100%;
-  /*margin: 2rem auto;*/
   display: flex;
   flex-direction: column;
   font-family: "helvetica", sans-serif;
 }
 #message_window .disconnected {
-  background: #FFFFCC;
   padding: 0.25rem;
+  color: #008ed6;
+  text-align: center;
+  letter-spacing: 0.2em;
 }
 #message_window.connected .disconnected {
   display: none;
@@ -147,54 +149,57 @@ a.button:hover {
   display: none;
 }
 #message_window.offline .offline {
-  background: #FF0000;
-  color: #FFF;
+  color: red;
   padding: 0.25rem;
+  letter-spacing: 0.2em;
   display: block;
-}
-#message_window .powered_by {
-  flex-shrink: 0;
   text-align: center;
-  border-bottom: 1px solid #CCC;
-  font-size: 14px;
-  padding: 0.25rem;
-  color: #666;
-}
-#message_window .powered_by a {
-  text-decoration: none;
-  color: #666;
-}
-#message_window .powered_by img {
-  position: relative;
-  top: 2px;
 }
 #message_window section {
-  flex-grow: 1;
-  flex-direction: column-reverse;
   display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
   overflow-y: auto;
+  scrollbar-width: thin;
 }
 #message_window section div div {
   margin: 0.25rem;
   clear: both;
 }
 #message_window footer {
-  border-top: 1px solid #CCC;
   padding: 0.25rem;
 }
 #message_window footer input[type=text] {
+  color: #004c73;
   flex-grow: 1;
-  font-size: 1.25rem;
-  outline: none;
   border: none;
+  box-shadow: 0 0 2px grey;
+  border-radius: 5px;
+  padding: 10px;
+  margin-left: 5px;
+}
+#message_window footer input[type=text]:focus {
+  box-shadow: 0 0 5px grey;
 }
 #message_window footer button {
-  width: 50px;
   background: none;
   border: 0;
-  cursor: pointer;
-  color: blue;
-  font-weight: bold;
+}
+#message_window footer .send-svg-icon {
+  width: 2em;
+  height: 2em;
+}
+#message_window footer .send-svg-icon path,
+#message_window footer .send-svg-icon polygon,
+#message_window footer .send-svg-icon rect {
+  fill: #008ed6;
+}
+#message_window footer .send-svg-icon circle {
+  stroke: #008ed6;
+  stroke-width: 1;
+}
+#message_window footer .send-svg-icon:hover {
+  stroke: #004c73;
 }
 #message_window form {
   display: flex;
@@ -204,19 +209,56 @@ a.button:hover {
 #message_window #message_template {
   display: none;
 }
-#message_window .message {
-  font-size: 14px;
-  padding: 0.5rem;
-  background: #F0F0F0;
-  color: #333;
-  border-radius: 5px;
+#message_window .logo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+#message_window .logo .logo-svg-icon {
+  width: 1.5em;
+  height: 1.5em;
+}
+#message_window .logo .logo-svg-icon path,
+#message_window .logo .logo-svg-icon polygon,
+#message_window .logo .logo-svg-icon rect {
+  fill: #008ed6;
+}
+#message_window .logo .logo-svg-icon circle {
+  stroke: #008ed6;
+  stroke-width: 1;
+}
+#message_window .logo .logo-text {
+  margin-left: 0.25em;
+  font-weight: bold;
+  color: #008ed6;
+}
+#message_window .logo .operator {
   width: auto;
-  display: inline-block;
+  height: auto;
+}
+#message_window .logo .operator img {
+  border-radius: 50%;
+  border: 3px solid #008ed6;
+}
+#message_window .message {
+  margin-top: 0;
+  padding: 0.5rem;
+  width: auto;
+  display: block;
   max-width: 75%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+#message_window .message.incoming {
+  margin-left: 1em;
+  float: left;
+  background: #008ed6;
+  color: white;
+  border-radius: 0 10px 10px 10px;
 }
 #message_window .file_attachment {
-  background: #F0F0F0;
-  color: #333;
+  background: #dedede;
+  color: #004c73;
   border-radius: 5px;
   display: inline-block;
   max-width: 75%;
@@ -247,8 +289,18 @@ a.button:hover {
 }
 #message_window .message.outgoing {
   float: right;
-  background: #a795ef;
-  color: white;
+  border-radius: 10px 0 10px 10px;
+  background: #dedede;
+  color: #008ed6;
+}
+#message_window .message.time {
+  background-color: white;
+  color: #b3b3b3;
+  font-size: 12px;
+  margin-top: 0;
+  margin-bottom: 8;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 #message_window #message_replies {
   text-align: center;
@@ -270,16 +322,15 @@ a.button:hover {
 #message_window #message_replies a {
   text-decoration: none;
   display: block;
-  border: 1px solid #a795ef;
-  color: #a795ef;
+  border: 1px solid #008ed6;
+  color: #008ed6;
   border-radius: 16px;
   padding: 0.25rem 1rem;
-  font-size: 14px;
   cursor: pointer;
 }
 #message_window #message_replies a:hover {
-  background: #a795ef;
-  color: #FFF;
+  background: #008ed6;
+  color: #fff;
 }
 
 /* typing indicator CSS based on code by Joseph Fusco -> https://codepen.io/fusco/pen/XbpaYv */
@@ -293,7 +344,7 @@ a.button:hover {
   width: 5px;
   float: left;
   margin: 0 1px;
-  background-color: #333;
+  background-color: #004c73;
   display: block;
   border-radius: 50%;
   opacity: 0.4;
