@@ -1,16 +1,26 @@
 $height: 400px;
+$mdout-blue: #008ed6;
 
 #embedded_messenger {
 
+  // Position when chatbot is INACTIVE
   position: fixed;
   z-index: 1000;
-
   bottom: -$height;
   right: 2rem;
 
-  height: $height + 34;
+  height: $height + 44;
   transition: 0.5s ease-in-out bottom;
 
+  // Chat outline
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 0 5px grey;
+
+  font-family: sans-serif;
+  font-size: 14px;
+
+  // Position when chatbot is ACTIVE
   &.active {
     bottom: 0;
   }
@@ -22,9 +32,35 @@ $height: 400px;
   }
 
   #message_header {
-    background: #000;
+    background: $mdout-blue;
     padding: 0.5rem 1rem;
     color: #FFF;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  // Chat SVG icon
+  .header-svg-icon {
+    width: 2em;
+    height: 2em;
+  }
+  .header-svg-icon path,
+  .header-svg-icon polygon,
+  .header-svg-icon rect {
+    fill: #FFF;
+  }
+  .header-svg-icon circle {
+    stroke: #FFF;
+    stroke-width: 1;
+  }
+
+  .header-title {
+    margin-left: 0.5em;
   }
 
 }

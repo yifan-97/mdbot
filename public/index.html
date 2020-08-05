@@ -1,63 +1,100 @@
 <html>
-    <head>
-        <title>Botkit Anywhere</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
-        <script src="https://cdn.rawgit.com/showdownjs/showdown/1.7.4/dist/showdown.min.js"></script>
-        <link rel="stylesheet" href="/css/styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body >
-      <div class="wrapper">
-
-        <div id="message_window">
-            <div class="disconnected">
-                Disconnected... reconnecting!
-            </div>
-            <div class="offline">
-                Offline! Reload to reconnect.
-            </div>
-            <div class="powered_by">
+<head>
+  <title>Botkit Anywhere</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.7.4/dist/showdown.min.js"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="wrapper">
+    <div id="message_window">
+      <div class="disconnected">
+        Disconnected... reconnecting!
+      </div>
+      <div class="offline">
+        Offline! Reload to reconnect.
+      </div>
+      <!-- <div class="powered_by">
               Powered by <a href="https://botkit.ai" target="_blank" title="Building Blocks for Building Bots"><img src="/botkit_icon.png" width="15" height="15" alt="Botkit Logo" /> Botkit</a>
+            </div> -->
+      <section>
+        <div id="message_list">
+          <div id="message_template">
+            <!-- logo display for incoming messages -->
+            {{#if message.logo}}
+            <div class="logo">
+              <!-- svg robot icon -->
+              <svg class="logo-svg-icon" viewBox="0 0 20 20">
+                <path fill="none"
+                  d="M18.21,16.157v-8.21c0-0.756-0.613-1.368-1.368-1.368h-1.368v1.368v1.368v6.841l-1.368,3.421h5.473L18.21,16.157z">
+                </path>
+                <path fill="none"
+                  d="M4.527,9.316V7.948V6.579H3.159c-0.756,0-1.368,0.613-1.368,1.368v8.21l-1.368,3.421h5.473l-1.368-3.421V9.316z">
+                </path>
+                <path fill="none"
+                  d="M14.766,5.895h0.023V5.21c0-2.644-2.145-4.788-4.789-4.788S5.211,2.566,5.211,5.21v0.685h0.023H14.766zM12.737,3.843c0.378,0,0.684,0.307,0.684,0.684s-0.306,0.684-0.684,0.684c-0.378,0-0.684-0.307-0.684-0.684S12.358,3.843,12.737,3.843z M10,1.448c0.755,0,1.368,0.613,1.368,1.368S10.755,4.185,10,4.185c-0.756,0-1.368-0.613-1.368-1.368S9.244,1.448,10,1.448z">
+                </path>
+                <path fill="none"
+                  d="M14.789,6.579H5.211v9.578l1.368,1.368h6.841l1.368-1.368V6.579z M12.052,12.052H7.948c-0.378,0-0.684-0.306-0.684-0.684c0-0.378,0.306-0.684,0.684-0.684h4.105c0.378,0,0.684,0.306,0.684,0.684C12.737,11.746,12.431,12.052,12.052,12.052z M12.052,9.316H7.948c-0.378,0-0.684-0.307-0.684-0.684s0.306-0.684,0.684-0.684h4.105c0.378,0,0.684,0.307,0.684,0.684S12.431,9.316,12.052,9.316z">
+                </path>
+              </svg>
+              <div class="logo-text">MDbot:</div>
             </div>
-            <section>
-                <div id="message_list">
-                    <div id="message_template">
-                        <div class="message {{message.type}}">
-                            {{#if message.isTyping}}
-                              <div class="typing-indicator">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                              </div>
-                            {{/if}}
-                            {{{message.html}}}
-
-                            {{#if message.open_link}}
-                              <a href="{{{message.open_link}}}" target="_blank" class="button_message">{{#if message.link_title}}{{message.link_title}}{{else}}{{message.open_link}}{{/if}}</a>
-                            {{/if}}
-                        </div>
-                        {{#message.files}}
-                          <div class="file_attachment">
-                          {{#if image}}
-                            <img src="{{{url}}}" alt="{{{url}}}" />
-                          {{else}}
-                            <a href="{{{url}}}" title="{{{url}}}">{{{url}}}</a>
-                          {{/if}}
-                          </div>
-                        {{/message.files}}
-                    </div>
-                </div>
-            </section>
-            <div id="message_replies">
+            {{/if}}
+            <!-- message -->
+            <div class="message {{message.type}}">
+              {{#if message.isTyping}}
+              <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              {{/if}}
+              {{{message.html}}}
+              {{#if message.open_link}}
+              <a href="{{{message.open_link}}}" target="_blank"
+                class="button_message">{{#if message.link_title}}{{message.link_title}}{{else}}{{message.open_link}}{{/if}}</a>
+              {{/if}}
             </div>
-            <footer>
-                <form onsubmit="Botkit.send(Botkit.input.value, event)">
-                    <input type="text" autocomplete="off" id="messenger_input" placeholder="Type here..." />
-                    <button type="submit">Send</button>
-                </form>
-            </footer>
+            <!-- message time -->
+            <div class="message {{message.type}} time">
+              {{#if message.time}}
+              {{message.time}}
+              {{/if}}
+            </div>
+            {{#message.files}}
+            <div class="file_attachment">
+              {{#if image}}
+              <img src="{{{url}}}" alt="{{{url}}}" />
+              {{else}}
+              <a href="{{{url}}}" title="{{{url}}}">{{{url}}}</a>
+              {{/if}}
+            </div>
+            {{/message.files}}
+          </div>
         </div>
-        </div>
-        <script src="/client.js"></script>
-    </body>
+      </section>
+      <!-- message replies -->
+      <div id="message_replies">
+      </div>
+      <!-- footer -->
+      <footer>
+        <form onsubmit="Botkit.send(Botkit.input.value, event)">
+          <input type="text" autocomplete="off" id="messenger_input" placeholder="Write your message here..." />
+          <button type="submit">
+            <!-- svg send icon -->
+            <svg class="send-svg-icon" viewBox="0 0 20 20">
+              <path
+                d="M17.218,2.268L2.477,8.388C2.13,8.535,2.164,9.05,2.542,9.134L9.33,10.67l1.535,6.787c0.083,0.377,0.602,0.415,0.745,0.065l6.123-14.74C17.866,2.46,17.539,2.134,17.218,2.268 M3.92,8.641l11.772-4.89L9.535,9.909L3.92,8.641z M11.358,16.078l-1.268-5.613l6.157-6.157L11.358,16.078z">
+              </path>
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </div>
+  </div>
+  <script src="/client.js"></script>
+</body>
 </html>

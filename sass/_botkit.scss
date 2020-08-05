@@ -1,4 +1,7 @@
 $botkit_purple: #a795ef;
+$mdout-blue: #008ed6;
+$mdout-dark-blue: #004C73;
+
 @mixin clearfix {
     &:after {
         content: "";
@@ -56,7 +59,11 @@ footer {
 }
 
 a {
-    color: $botkit_purple;
+    color: white;
+}
+
+a:hover {
+  color: $mdout-dark-blue;
 }
 
 .copyurl {
